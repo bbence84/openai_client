@@ -3,6 +3,7 @@ import 'package:openai_client/src/client.dart';
 import 'package:openai_client/src/logger/logger.dart';
 import 'package:openai_client/src/model/model.dart';
 import 'package:openai_client/src/network/network.dart';
+import 'package:openai_client/src/model/shared_models/shared_models.dart';
 import 'dart:convert';
 
 /// Creates a completion for the provided prompt and parameters.
