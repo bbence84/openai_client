@@ -72,7 +72,7 @@ class OpenAIChatCompletions {
       client: client,
       httpRequest: http.Request('POST', baseUrl),
       bodyDeserializer: (body) =>
-          Completion.fromMap(body as Map<String, dynamic>),
+          ChatCompletion.fromMap(body as Map<String, dynamic>),
       jsonBody: jsonBody,
     );
 
