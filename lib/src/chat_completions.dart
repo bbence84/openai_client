@@ -46,6 +46,9 @@ class OpenAIChatCompletions {
       level: Level.debug,
       isActive: client.enableLogging,
     );
+    
+    print(baseUrl);
+    
 
     final jsonBody = <String, dynamic>{
       'model': model,
@@ -62,6 +65,8 @@ class OpenAIChatCompletions {
       if (logitBias != null) 'logit_bias': logitBias,
       if (user != null) 'user': user,
     };
+    
+    print(jsonBody);
 
     final req = Request(
       client: client,
