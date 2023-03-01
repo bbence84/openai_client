@@ -3,6 +3,7 @@ import 'package:openai_client/src/client.dart';
 import 'package:openai_client/src/logger/logger.dart';
 import 'package:openai_client/src/model/model.dart';
 import 'package:openai_client/src/network/network.dart';
+import 'dart:convert';
 
 /// Creates a completion for the provided prompt and parameters.
 ///
@@ -26,19 +27,16 @@ class OpenAIChatCompletions {
   /// found in the [OpenAI API documentation](https://beta.openai.com/docs/api-reference/completions/create).
   Request<ChatCompletion> create({
     required String model,
-    String? prompt,
-    String? suffix,
+    Array<ChatMessage>? messages,
     int maxTokens = 16,
     double temperature = 1.0,
     double topP = 1.0,
     int n = 1,
     bool stream = false,
-    int? logprobs,
     bool echo = false,
     String? stop,
     double presencePenalty = 0.0,
     double frequencyPenalty = 0.0,
-    int bestOf = 1,
     Map<String, dynamic>? logitBias,
     String? user,
   }) {
@@ -51,19 +49,16 @@ class OpenAIChatCompletions {
 
     final jsonBody = <String, dynamic>{
       'model': model,
-      'prompt': prompt,
-      'suffix': suffix,
+      'messages': messages,
       'max_tokens': maxTokens,
       'temperature': temperature,
       'top_p': topP,
       'n': n,
       'stream': stream,
-      'logprobs': logprobs,
       'echo': echo,
       'stop': stop,
       'presence_penalty': presencePenalty,
       'frequency_penalty': frequencyPenalty,
-      'best_of': bestOf,
       if (logitBias != null) 'logit_bias': logitBias,
       if (user != null) 'user': user,
     };
@@ -85,4 +80,29 @@ class OpenAIChatCompletions {
 
     return req;
   }
+}
+
+
+List<ChatMessage> chatMessageFromJson(String str) => List<ChatMessage>.from(json.decode(str).map((x) => ChatMessage.fromJson(x)));
+
+String chatMessageToJson(List<ChatMessage> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class ChatMessage {
+    ChatMessage({
+        required this.role,
+        required this.content,
+    });
+
+    String role;
+    String content;
+
+    factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
+        role: json["role"],
+        content: json["content"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "role": role,
+        "content": content,
+    };
 }
