@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:openai_client/src/completions.dart';
+import 'package:openai_client/src/chat_completions.dart';
 import 'package:openai_client/src/configuration.dart';
 import 'package:openai_client/src/edits.dart';
 import 'package:openai_client/src/embeddings.dart';
