@@ -5,4 +5,3 @@ export 'openai_embeddings/openai_embeddings.dart';
 export 'openai_images/openai_images.dart';
 export 'openai_models/openai_models.dart';
 export 'openai_moderation/openai_moderation.dart';
-import 'shared_models/shared_models.dart';
