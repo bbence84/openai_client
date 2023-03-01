@@ -27,7 +27,7 @@ class OpenAIChatCompletions {
   /// found in the [OpenAI API documentation](https://beta.openai.com/docs/api-reference/completions/create).
   Request<ChatCompletion> create({
     required String model,
-    Array<ChatMessage>? messages,
+    List<ChatMessage>? messages,
     int maxTokens = 16,
     double temperature = 1.0,
     double topP = 1.0,
