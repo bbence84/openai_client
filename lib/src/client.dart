@@ -53,6 +53,9 @@ class OpenAIClient {
 
   /// Provides access to resources related to [Completions].
   OpenAICompletions get completions => OpenAICompletions(this);
+  
+ /// Provides access to resources related to [ChatCompletions].
+  OpenAIChatCompletions get chatCompletions => OpenAIChatCompletions(this);  
 
   /// Provides access to resources related to [Edits].
   OpenAIEdits get edits => OpenAIEdits(this);
