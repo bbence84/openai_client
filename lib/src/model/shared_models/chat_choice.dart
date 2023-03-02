@@ -1,64 +1,60 @@
+import 'dart:convert';
+
+import 'package:equatable/equatable.dart';
+
 /// The choice class.
-class Choice extends Equatable {
-  /// Instance of [Choice].
-  const Choice({
-    required this.text,
+class ChatChoice extends Equatable {
+  /// Instance of [ChatChoice].
+  const ChatChoice({
+    required this.message,
     required this.index,
-    this.logprobs,
     this.finishReason,
   });
 
   /// `dart:convert`
   ///
-  /// Parses the string and returns the resulting Json object as [Choice].
-  factory Choice.fromJson(String data) {
-    return Choice.fromMap(json.decode(data) as Map<String, dynamic>);
+  /// Parses the string and returns the resulting Json object as [ChatChoice].
+  factory ChatChoice.fromJson(String data) {
+    return ChatChoice.fromMap(json.decode(data) as Map<String, dynamic>);
   }
 
-  /// Mappping from [Map] to [Choice].
-  factory Choice.fromMap(Map<String, dynamic> data) => Choice(
-        text: data['text'] as String,
+  /// Mappping from [Map] to [ChatChoice].
+  factory ChatChoice.fromMap(Map<String, dynamic> data) => ChatChoice(
+        message: data['message'] as Map<String, dynamic>,
         index: data['index'] as int,
-        logprobs: data['logprobs'] as dynamic,
         finishReason: data['finish_reason'] as String?,
       );
 
-  /// The choice text.
-  final String text;
+  /// The choice message.
+  final Map<String, dynamic> message;
 
   /// The choice index.
   final int index;
 
-  /// The choice logprobs.
-  final dynamic logprobs;
-
   /// The choice finish reason.
   final String? finishReason;
 
-  /// Mappping from [Choice] to [Map].
+  /// Mappping from [ChatChoice] to [Map].
   Map<String, dynamic> toMap() => {
-        'text': text,
+        'message': message,
         'index': index,
-        'logprobs': logprobs,
         'finish_reason': finishReason,
       };
 
   /// `dart:convert`
   ///
-  /// Converts [Choice] to a JSON string.
+  /// Converts [ChatChoice] to a JSON string.
   String toJson() => json.encode(toMap());
 
   /// Copy with extension.
-  Choice copyWith({
-    String? text,
+  ChatChoice copyWith({
+    String? message,
     int? index,
-    dynamic logprobs,
     String? finishReason,
   }) {
-    return Choice(
-      text: text ?? this.text,
+    return ChatChoice(
+      message: message ?? this.message,
       index: index ?? this.index,
-      logprobs: logprobs ?? this.logprobs,
       finishReason: finishReason ?? this.finishReason,
     );
   }
@@ -67,5 +63,5 @@ class Choice extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object?> get props => [text, index, logprobs, finishReason];
+  List<Object?> get props => [message, index, finishReason];
 }
