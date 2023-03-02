@@ -48,7 +48,7 @@ class ChatChoice extends Equatable {
 
   /// Copy with extension.
   ChatChoice copyWith({
-    String? message,
+    Map<String, dynamic>? message,
     int? index,
     String? finishReason,
   }) {
