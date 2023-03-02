@@ -29,7 +29,7 @@ class ChatCompletion extends Equatable {
         created: data['created'] as int,
         model: data['model'] as String,
         choices: (data['choices'] as List<dynamic>)
-            .map((e) => Choice.fromMap(e as Map<String, dynamic>))
+            .map((e) => ChatChoice.fromMap(e as Map<String, dynamic>))
             .toList(),
         usage: Usage.fromMap(data['usage'] as Map<String, dynamic>),
       );
@@ -47,7 +47,7 @@ class ChatCompletion extends Equatable {
   final String model;
 
   /// The completion choices.
-  final List<Choice> choices;
+  final List<ChatChoice> choices;
 
   /// The completion usage.
   final Usage usage;
@@ -73,7 +73,7 @@ class ChatCompletion extends Equatable {
     String? object,
     int? created,
     String? model,
-    List<Choice>? choices,
+    List<ChatChoice>? choices,
     Usage? usage,
   }) {
     return ChatCompletion(
